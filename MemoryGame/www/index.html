@@ -1,0 +1,512 @@
+ <!DOCTYPE html>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Memory Game Home Screen</title>
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.2.css" />
+        <link rel="stylesheet" type="text/css" href="css/memorygame.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.simpledialog.min.css" />
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/libs/jquery.min.js"></script>
+        <script type="text/javascript" src="js/libs/jquery.mobile.min.js"></script>
+        <script type="text/javascript" src="js/libs/openfb.js"></script>
+        <script type="text/javascript" src="js/libs/jquery.mobile.simpledialog2.min.js"></script>
+        <script type="text/javascript" src="js/memorygame.js"></script>
+        <script type="text/javascript" src="js/facebooklogin.js"></script>
+        <script type="text/javascript" src="js/customgamelist.js"></script>
+        <script type="text/javascript" src="js/predefinedgamelist.js"></script>
+        <script type="text/javascript" src="js/loadnavigationpanel.js"></script>
+        <script type="text/javascript" src="js/scoresScript.js"></script>
+        <script type="text/javascript" src="js/creategame.js"></script>
+        <script type="text/javascript" src="js/settingsScript.js"></script>
+        <script type="text/javascript" src="js/difficultyselection.js"></script>
+    </head>
+    <body>
+        <!-- ############# MAIN PAGE ############# -->
+        <div id = "main_page" data-role="page" data-theme="b">
+            <div data-role="header" data-theme="b" data-position="fixed" >
+                <h1>Memory Game</h1>
+        		<a id="facebookLogoutButton" style="display: none;" data-role="button" data-transition="none" data-theme="b" class="ui-btn-right">
+            		Logout
+        		</a>
+            </div> <!-- end of header -->
+            
+            <div id="home_page_container" data-role="main" class="ui-content" data-theme="b"> 
+		        <a href="#game_selection_page_installed" data-icon="home" data-iconpos="left" class="ui-btn ui-btn-b ui-icon-home ui-btn-icon-left" data-transition="slide">
+		            Play Game
+		        </a>
+		        <a href="#create_custom_page" data-icon="edit" data-iconpos="left" class="ui-btn ui-btn-b ui-icon-edit ui-btn-icon-left" data-transition="slide">
+		            Create Game
+		        </a>
+		        <a href="#predefined_scores_page" data-icon="grid" data-iconpos="left" class="ui-btn ui-btn-b ui-icon-grid ui-btn-icon-left" data-transition="slide">
+		            Scores
+		        </a>
+		        <a href="#settings_page" data-icon="gear" data-iconpos="left" class="ui-btn ui-btn-b ui-icon-gear ui-btn-icon-left" data-transition="slide">
+		            Settings
+		        </a>
+		        <a href="#help_page" data-icon="info" data-iconpos="left" class="ui-btn ui-btn-b ui-icon-info ui-btn-icon-left" data-transition="slide">
+		            Help
+		        </a>
+		        <a id="facebook_login_button" href="#" data-icon="user" data-iconpos="left" class="ui-btn ui-btn-b ui-icon-user ui-btn-icon-left" data-transition="slide">
+		            Facebook Login
+		        </a>
+		    </div>
+		    <div class="facebookloginmessage" align="center"></div>
+		    <!-- end of content -->
+            <div data-role="footer" data-theme="b" data-position="fixed">
+	        	
+	            <h4>Memory Game &copy; 2014</h4> 
+	           
+            </div> <!-- end of header -->
+        </div> <!-- end of page id = "main_page" -->
+
+		<!-- ############# GAME SELECTION INSTALLED ############# -->    
+        <div id = "game_selection_page_installed" data-role="page" data-theme="b">
+            <div data-role="header" data-theme="b" data-theme="b" data-position="fixed">
+                <h1>Select Game</h1>
+                <div data-role="navbar">
+                <ul>
+                    <li>
+                        <a href="#game_selection_page_installed" data-theme="b" data-icon="" class="ui-btn-active ui-state-persist" data-transition="none"> INSTALLED </a>
+                    </li>
+                    <li>
+                        <a href="#game_selection_page_custom" data-theme="b" data-icon="" data-transition="none"> CUSTOM </a>
+                    </li>
+                </ul>
+            	</div>
+	            <form class="ui-filterable">
+	  				<input id="predefinedgamefilter" data-type="search" data-theme="a">
+				</form>
+            </div> <!-- end of header -->		    
+        <div data-role="main" class="ui-content">
+            <ul data-role="listview" data-divider-theme="a" data-inset="true" id="preinstalled_listview" data-filter="true" data-input="#predefinedgamefilter" data-scroll="true">
+            </ul>
+        </div><!-- end of content -->
+        <div data-role="footer" data-theme="b" data-position="fixed">
+        	
+            <h4>Memory Game &copy; 2014</h4> 
+            
+        </div> <!-- end of header -->
+        </div> <!-- end of page id = "game_selection_page_installed" -->
+        
+		<!-- ############# GAME SELECTION CUSTOM ############# -->    
+        <div id = "game_selection_page_custom" data-role="page" data-theme="b">
+            <div data-role="header" data-theme="b" data-theme="b" data-position="fixed">
+                <h1>Select Game</h1>
+	            <div data-role="navbar" data-iconpos="top" data-position="fixed">
+	                <ul>
+	                    <li>
+	                        <a href="#game_selection_page_installed" data-theme="b" data-icon="" data-transition="none"> INSTALLED </a>
+	                    </li>
+	                    <li>
+	                        <a href="#game_selection_page_custom" data-theme="b" data-icon="" class="ui-btn-active ui-state-persist" data-transition="none"> CUSTOM </a>
+	                    </li>
+	                </ul>
+	            </div>
+	            <form class="ui-filterable">
+	  				<input id="customgamefilter" data-type="search" data-theme="a">
+				</form>                 
+            </div> <!-- end of header -->		    
+	        <div data-role="main" class="ui-content">
+	        	<div id="usernotloggedin" >
+        	        <h3 align="center">
+			            Please Register/Login
+			        </h3>
+			        <h4 align="center">
+			            In order to create, view, edit and play your own custom games, it is necessary for user to be logged in.
+			            <br> <br> 
+			        </h4>
+			        <a id="facebook_login_button2" href="#" data-icon="user" data-iconpos="left" class="ui-btn ui-btn-b ui-icon-user ui-btn-icon-left" data-transition="slide">
+		            Facebook Login 
+		            </a>
+	        	</div>
+	        	<div id="creategamediv" >
+        	        <h3 align="center">
+			            Create Game
+			        </h3>
+			        <h4 align="center">
+			            No Custom games found. Please create your custom game.
+			            <br> <br> 
+			        </h4>
+			         <a href="#create_custom_page" data-icon="edit" data-iconpos="left" class="ui-btn ui-btn-b ui-icon-edit ui-btn-icon-left" data-transition="slide">
+		            Create Game
+		        </a>
+	        	</div>
+	        	 <div class="facebookloginmessage" align="center"></div>
+	            <ul id="customgameslist" data-role="listview" data-divider-theme="a" data-inset="true" data-filter="true" data-input="#customgamefilter">
+	            </ul>
+	        </div><!-- end of content -->
+	        <div data-role="footer" data-theme="b" data-position="fixed">
+	            <h4>Memory Game &copy; 2014</h4> 
+	        </div> <!-- end of header -->
+        </div> <!-- end of page id = "game_selection_page_custom" -->
+        
+        
+        <!-- ############# DIFFICULTY LEVEL ############# -->
+        <div id = "game__difficulty_selection_page" data-role="page" data-theme="b" data-tap-toggle="false">
+            <div data-role="header" data-theme="b" data-theme="b" data-position="fixed">
+                <h1>Difficulty</h1>
+        </div> <!-- end of header -->	        	        
+        <div data-role="main" class="ui-content">
+            <ul data-role="listview" data-theme="b" data-inset="true" id="difficultyselectionselectedgame">
+            </ul>
+            <div>
+            	<h4 align="center">Select Difficulty Level</h4>
+            </div>
+            <ul data-role="listview" data-divider-theme="a" data-inset="true" id="difficulty_listview">
+                <li data-theme="b">
+                    <a href="#play_page" data-transition="slide">EASY</a>
+                </li>
+                <li data-theme="b">
+                    <a href="#play_page" data-transition="slide">NORMAL</a>
+                </li>
+                <li data-theme="b">
+                    <a href="#play_page" data-transition="slide">HARD</a>
+                </li>
+                <li data-theme="b">
+                    <a href="#play_page" data-transition="slide">HELL</a>
+                </li>
+            </ul>
+            <br>
+            <div id="difficultyleveldisabledmessage" align="center">
+            </div>
+        </div>
+        <div data-role="footer" data-theme="b" data-position="fixed" data-tap-toggle="false">
+            <h4>Memory Game &copy; 2014</h4>
+        </div> <!-- end of header -->
+        </div> <!-- end of page id = "game__difficulty_selection_page" -->   
+             
+            
+        <!-- ############# PLAY PAGE ############# -->
+        <div id = "play_page" data-role="page" data-theme="b">
+            <div data-role="header" data-theme="b" data-theme="b" data-position="fixed" data-tap-toggle="false">
+                <span id="score-status"> time: <span>0</span> </br> moves: <span>0</span></span>
+                <h1>Game</h1>
+
+            </div> <!-- end of header -->
+            <div data-role="content" data-theme="b" data-position="fixed">
+                <!-- quick game -->
+                 <div id="game-wrapper">  
+                </div>
+
+                <div data-role="popup" id="score-popup">
+                    <h3 align="center"> Game Over </h3>
+                    <p>Your final score was 100.</p>
+                    <a href="#predefined_scores_page" data-transition="slide" data-icon="grid" class="ui-btn ui-btn-b ui-icon-star ui-btn-icon-left"> Scores</a>
+                    <a href="#main_page" data-transition="slide" data-icon="home" class="ui-btn ui-btn-b ui-icon-home ui-btn-icon-left"> Menu</a>
+                    <a href="#game__difficulty_selection_page" id="restartgame" class="ui-btn ui-btn-b ui-icon-refresh ui-btn-icon-left"> Restart</a>
+                </div>
+
+            </div> <!-- end of content -->
+           
+        </div> <!-- end of page id = "play_page" -->        
+        
+        <!-- ############# CREATE CUSTOM GAME PAGE ############# -->
+        <div id = "create_custom_page" data-role="page" data-theme="b">
+            <div data-role="header" data-theme="b" data-theme="b" data-position="fixed" data-tap-toggle="false">
+                <h1>Create Game</h1>
+                <div align="center" class="ui-btn-right">
+                    <select id="difficultylevelselectmenu" data-theme="b">
+                    	<option value="SELECT"> Select </option>
+                        <option value="EASY"> Easy </option>
+                        <option value="NORMAL"> Normal </option>
+                        <option value="HARD"> Hard </option>
+                        <option value="HELL"> Hell </option>
+                    </select>
+                </div> <!-- end of select menu -->
+                <div id="numberofimagesrequiredmessage" align="center">
+                </div>                
+            </div> <!-- end of header -->
+            <div data-role="content" data-theme="b"  >
+				<br>
+				<div id="usernotloggedin" >
+        	        <h3 align="center">
+			            Please Register/Login
+			        </h3>
+			        <h4 align="center">
+			            In order to create, view, edit and play your own custom games, it is necessary for user to be logged in.
+			            <br> <br> 
+			        </h4>
+			        
+	        	</div>
+	        	<div id="selectdifficultylevelmessage" align="center">
+	        		Please select difficulty level from top right dropdown menu.
+	        	</div>
+                <div id="imagesgrid">
+                <!-- Creates a grid of 2*3 for saving six images for easy game-->
+                <!-- Creates a grid of 4*3 for saving twelve images for normal game-->
+                <!-- Creates a grid of 5*3 for saving fifteen images for hard game-->
+                <!-- Creates a grid of 7*3 for saving twenty one images for hell game-->
+                </div>
+                <br><br>
+                <a id="facebook_login_button3" href="#" data-icon="user" data-iconpos="left" class="ui-btn ui-btn-b ui-icon-user ui-btn-icon-left" data-transition="slide">
+		            Facebook Login 
+		            </a>
+                <div class="facebookloginmessage" align="center"></div>
+				<div data-role="popup" id="imageselectionpopupmenu" data-theme="b" data-transition="pop" data-position-to="window">
+						<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				        <ul data-role="listview" data-inset="true" >
+				            <li data-role="list-divider" data-icon="action">Select Image Source</li>
+				            <li data-theme="b" data-icon="grid" ><a id="creategamegallerybutton" onclick="creategame.usegallery()" href="#">Gallery</a></li>
+				            <li data-theme="b" data-icon="camera" ><a id="creategamecamerabutton" onclick="creategame.usecamera()" href="#">Camera</a></li>
+				            <li data-theme="b" data-icon="user" ><a id="creategamefacebookbutton" onclick="creategame.loadfacebookgalleries();" data-rel="panel" data-controltype="panelbutton" href="#creategamefacebookphotospanel">Facebook Photos</a></li>
+				        </ul>
+				</div>
+				<div data-role="panel" id="creategamefacebookphotospanel" data-position="left" data-display="overlay" data-theme="b"> 
+				<!-- style="opacity : 0.8;" -->
+		            <div data-role="header" data-theme="b" data-position="fixed" class="fixmetop">
+		            	<!-- div align="center" id="facebookleftpanelusername">Photos</div-->
+						<div align="center" class="ui-grid-a" style="height: 15%">
+							<a href="#" class="ui-btn ui-block-a ui-icon-back ui-btn-icon-left" style="padding: 5%" onclick="$('#facebooklistofalbumsdiv').show();$('#selectedalbumimages').hide();$('#selectalbumimagemessage').text('select album');">Albums</a>
+							<a href="#create_custom_page" data-rel="close" class="ui-btn ui-block-b ui-icon-delete ui-btn-icon-left" style="padding: 5%">Close</a>
+						</div>
+	            		<div align="center" id="selectalbumimagemessage">
+	            			select album
+	            		</div>		            
+		            </div> <!-- end of header -->
+		            <div data-role="header">
+		            	<div id="facebooklistofalbumsdiv"  style="padding-top: 20%">
+				            <ul id="facebooklistofalbums" data-role="listview" data-inset="true">
+				            </ul>		            	
+		            	</div>
+		            	<div id="selectedalbumimages" style="padding-top: 25%">
+						</div>
+					</div>
+				</div>				
+            </div> <!-- end of content -->
+            <div data-role="footer" data-position="fixed" data-tap-toggle="false" style="height: 10%">
+                <div align="center">
+                    <a href="#" id="cancelcreategame" onclick="creategame.cancelGame()" data-iconpos="left" class="ui-btn ui-btn-b ui-icon-delete ui-btn-icon-left" style="width: 35%;height: 20%; padding: 5% " data-theme="b"> Cancel </a>
+                    <a href="#" id="savecreategame" onclick="creategame.saveGame()" data-iconpos="left" class="ui-btn ui-btn-b ui-icon-check ui-btn-icon-left" style="width: 35%;height: 20%; padding: 5% " data-theme="b"> Save </a>
+                </div>
+            </div> <!-- end of header -->
+        </div> <!-- end of page id = "create_custom_page" -->
+
+        <!-- ############# HELP PAGE ############# -->
+        <div id = "help_page" data-role="page" data-theme="b">
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <h1>Help</h1>
+            </div> <!-- end of header -->
+            <div data-role="main" class="ui-content">
+			
+			<div data-role="collapsible" data-theme="b" data-content-theme="b"> <!-- using collapsibles to show help different help parts -->
+				<h1>How to play</h1>
+				<p>Firstly, a set of cards is presented on a grid. You have a few seconds to memorize the location each card until they are rotated to face down. Your goal is to pair together cards with the same image.</p>               
+			</div>
+			
+			<div data-role="collapsible" data-theme="b" data-content-theme="b">
+				<h1>Predefined and Custom Games</h1>
+				<p>You can choose among a predefined variety of card categories (e.g. animals, trees, shapes) or simply create your own custom cards using your camera or Facebook photos.</p>
+            </div>
+			
+			<div data-role="collapsible" data-theme="b" data-content-theme="b">
+				<h1>Check your scores</h1>
+				<p>After game session, don't forget to check your score and share it on Facebook.</p>
+			</div>
+
+			<div data-role="collapsible" data-theme="b" data-content-theme="b">
+				<h1>Video tutorial</h1>
+				<iframe id="player" type="text/html" width="280" height="190"
+  					src="https://www.youtube.com/embed/UXQa08kggE8" frameborder="1">
+  				</iframe>
+			</div>
+                
+            </div> <!-- end of ui-content -->
+            <div data-role="footer" data-theme="b" data-position="fixed">
+                <h4>Memory Game &copy; 2014</h4>
+            </div> <!-- end of header -->
+        </div> <!-- end of page id = "help_page" -->
+        
+        <!-- ############# SETTINGS PAGE ############# -->
+        <div id="settings_page" data-role="page" data-theme="b" >
+            <div data-role="header" data-theme="b"  data-position="fixed">
+                <h1>Settings</h1>
+            </div> <!-- end of header -->
+            <div data-role="content" data-theme="b">
+
+		        <div class="ui-grid-a">
+		            <div class="ui-block-a">
+		                <h2>
+		                    Sound
+		                </h2>
+		            </div>
+		            <div class="ui-block-b">
+		                <div data-role="fieldcontain" data-controltype="toggleswitch">
+		                    <select name="soundsSlider" id="soundsSlider" data-theme="" data-role="slider">
+		                        <option value="off">
+		                            Off
+		                        </option>
+		                        <option value="on">
+		                            On
+		                        </option>
+		                    </select>
+		                </div>
+		            </div>
+		            <div class="ui-block-a">
+		                <h2>
+		                    Vibration
+		                </h2>
+		            </div>
+		            <div class="ui-block-b">
+		                <div data-role="fieldcontain" data-controltype="toggleswitch">
+		                    <select name="vibrationSlider" id="vibrationSlider" data-theme="" data-role="slider">
+		                        <option value="off">
+		                            Off
+		                        </option>
+		                        <option value="on">
+		                            On
+		                        </option>
+		                    </select>
+		                </div>
+		            </div>
+		        </div>
+            </div> <!-- end of content -->
+            <div data-role="footer" data-theme="b" data-position="fixed">
+                <h4>Memory Game &copy; 2014</h4>
+            </div> <!-- end of header -->
+        </div> <!-- end of page id = "help_page" -->
+
+        <!-- ############# PREDEFINED GAMES' SCORES PAGE ############# -->
+        <div id = "predefined_scores_page" data-role="page" data-theme="b">
+            <div data-role="header" data-theme="b" data-theme="b" data-position="fixed">
+                <h1>Scores</h1>
+
+            </div> <!-- end of header -->
+            <div id="scores_content" data-role="content" data-theme="b">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="" id="predefined" class="ui-btn-active ui-state-persist"><strong>predefined games</strong></a></li>
+                        <li><a href="" id="customs"><strong>custom games</strong></a></li>
+                    </ul>
+                </div>
+
+                <div data-role="navbar" id="difficulty_level">
+                    <ul>
+                        <li><a href="" id="easySelected" class="ui-btn-active ui-state-persist">easy</a></li>
+                        <li><a href="" id="normalSelected">normal</a></li>
+                        <li><a href="" id="hardSelected">hard</a></li>
+                        <li><a href="" id="hellSelected">hell</a></li>
+                    </ul>
+                </div>
+
+                <div id="scores_per_category">
+                    <p id="path_info">scores >prededined games > easy</p>
+                    <ul data-role="listview" data-inset="true" data-count-theme="c" id="scores_list">
+                        <!-- li to be added -->
+                    </ul>
+                </div>        
+            </div> <!-- end of content -->
+            
+            <div data-role="footer" data-theme="b" data-position="fixed">
+                <h4>Memory Game &copy; 2014</h4>
+            </div> <!-- end of header -->
+        </div> <!-- end of page id = "help_page" -->
+
+        <!-- ############# CUSTOM GAMES' SCORES PAGE ############# -->
+        <div id = "custom_scores_page" data-role="page" data-theme="b">
+            <div data-role="header" data-theme="b"  data-position="fixed">
+                <h1>Scores</h1>
+            </div> <!-- end of header -->
+            <div data-role="content" data-theme="b">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#predefined_scores_page" id="predefined">predefined games</a></li>
+                        <li><a href="#custom_scores_page" id="customs" class="ui-btn-active ui-state-persist">custom games</a></li>
+                    </ul>
+                    <p>custom games</p>
+                </div>
+            </div> <!-- end of content -->
+            <div data-role="footer" data-theme="b" data-position="fixed">
+                <h4>Memory Game &copy; 2014</h4>
+            </div> <!-- end of header -->
+        </div> <!-- end of page id = "help_page" -->
+        
+        <!-- ########### LEFT NAVIGATION PANEL ######################### -->
+        <!-- Just added into the page, otherwise somehow it shows up in between, this page is never used, but leftnavigationpaneldiv is to create duplicate copies
+        	using javascript loadleftnavigation.js -->
+        <div id = "dummyleftnavigationpanelpage" data-role="page" data-theme="b">
+            <div data-role="header" data-theme="b"  data-position="fixed">
+            </div> <!-- end of header -->
+            <div data-role="content" data-theme="b">
+				<div data-role="panel" id="leftnavigationpaneldiv" data-position="left" data-display="overlay" data-theme="b" data-position-fixed="true">
+					<ul data-role="listview" data-inset=false >
+						<li data-theme="b" data-icon="home" ><a href="#main_page" data-transition="slide"> Home </a></li>
+						<li data-role="list-divider"></li>
+						<li data-theme="b" data-icon="bullets" ><a href="#game_selection_page_installed" data-transition="slide">Select Game </a></li>
+						<li data-role="list-divider"></li>
+						<li data-theme="b" data-icon="edit" ><a href="#create_custom_page" data-transition="slide">Create Game </a></li>
+						<li data-role="list-divider"></li>
+						<li data-theme="b" data-icon="grid" ><a href="#predefined_scores_page" data-transition="slide">Scores </a></li>
+						<li data-role="list-divider"></li>
+						<li data-theme="b" data-icon="gear" ><a href="#settings_page" data-transition="slide">Settings </a></li>
+						<li data-role="list-divider"></li>
+						<li data-theme="b" data-icon="info" ><a href="#help_page" data-transition="slide">Help </a></li>
+						<li data-role="list-divider"></li>
+					</ul>
+				</div>
+            </div> <!-- end of content -->
+            <div data-role="footer" data-theme="b" data-position="fixed">
+            </div> <!-- end of header -->
+        </div> <!-- end of page id = "dummyleftnavigationpanelpage" -->	
+        
+	<script type="text/javascript">
+		$(document).ready(
+				function() {
+					window.isphone = false;
+					if (document.URL.indexOf("http://") === -1
+							&& document.URL.indexOf("https://") === -1) {
+						window.isphone = true;
+					}
+
+					if (window.isphone) {
+						document.addEventListener("deviceready", onDeviceReady,
+								false);
+						// if it is running on phone, then only add cordova script, else it stops working on
+						// browsers
+						var script = document.createElement('script');
+						script.type = 'text/javascript';
+						script.src = 'cordova.js';
+						$("head").append(script);
+					} else {
+						onDeviceReady();
+					}
+				});
+
+		function onDeviceReady() {
+			// configure the loader
+			  $.mobile.loader.prototype.options.text = "Loading";
+              $.mobile.loader.prototype.options.textVisible = true;
+              $.mobile.loader.prototype.options.theme = "a";
+              $.mobile.loader.prototype.options.textonly = false;
+			
+			// device is ready , initialize the facebook
+			facebookLogin.initializeFacebookApp(window.isphone);
+			facebookLogin.addListeners();
+            loadleftpanel.loadLeftNavigatonPanel();
+		}
+	</script>
+    </body>
+</html>

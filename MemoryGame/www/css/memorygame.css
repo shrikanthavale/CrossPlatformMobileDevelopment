@@ -1,0 +1,119 @@
+#score-status {
+	width: 20%;
+	float:right;
+	font-weight: normal;
+	font-size: 13px;
+	margin-top: 5px
+}
+#game-wrapper {
+	width: 100%;
+	margin-left: 15px;
+	perspective: 1000;
+}
+.card {
+	float: left;
+	background: rgba(238, 228, 218, 0.35);
+	font-size: 50px;
+	
+	box-sizing: border-box;
+}
+.questionmark::before {
+	content: "?";
+	color:rgb(201, 201, 201);
+}
+.questionmark {
+	display: block;
+	position: absolute;
+	margin-left: 20px;
+	margin-top: 10px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.card img {
+	visibility: hidden;
+	-webkit-transform: rotateY(-180deg);
+	-moz-transform: rotateY(-180deg);
+	-webkit-transition: all .4s ease-in-out;
+	-moz-transition: all .4s ease-in-out;
+	transition: all .4s ease-in-out;
+
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+.card {
+	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
+
+	-webkit-transition: all .4s ease-in-out;
+	-moz-transition: all .4s ease-in-out;
+	transition: all .4s ease-in-out;
+
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+
+
+}
+.card-opened img {
+	visibility: visible;
+/*	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);*/
+	/*background: #c33;*/
+	-webkit-backface-visibility: visible;
+	-moz-backface-visibility: visible;
+	backface-visibility: visible;
+}
+.card-opened {
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-webkit-backface-visibility: visible;
+	-moz-backface-visibility: visible;
+	backface-visibility: visible;
+	/*background: #c33;*/
+}
+.card-solved img {
+	visibility: hidden;
+	/*background: #c33;*/
+}
+.card-solved {
+	background: none !important;
+}
+.card-easy {
+	margin-right: 10px;
+	border-radius: 3px;
+	margin-bottom: 8px;
+
+}
+.card-easy .questionmark {
+	font-size: 70px;
+}
+.card-normal {
+	margin-right: 6px;
+	border-radius: 3px;
+	margin-bottom: 6px;
+}
+.card-normal .questionmark {
+	font-size: 45px;
+}
+.card-hard {
+	margin-right: 4px;
+	border-radius: 2px;
+	margin-bottom: 4px;
+}
+.card-hard .questionmark {
+	font-size: 30px;
+}
+.card-hell {
+	margin-right: 4px;
+	border-radius: 2px;
+	margin-bottom: 4px;
+}
+
+
+
+
